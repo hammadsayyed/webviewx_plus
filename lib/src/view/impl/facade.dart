@@ -100,6 +100,9 @@ class WebViewX extends StatelessWidget implements view_interface.WebViewX {
   final Function onScrollChanged;
 
   @override
+  final Function? onHorizontalScrollChanged;
+
+  @override
   final Function? onScrollChangedForMobileWeb;
 
   /// Constructor
@@ -123,6 +126,7 @@ class WebViewX extends StatelessWidget implements view_interface.WebViewX {
     this.onWebResourceError,
     this.webSpecificParams = const WebSpecificParams(),
     this.mobileSpecificParams = const MobileSpecificParams(), required this.onScrollChanged,this.onScrollChangedForMobileWeb,
+    this.onHorizontalScrollChanged,
   }) : super(key: key);
 
   @override

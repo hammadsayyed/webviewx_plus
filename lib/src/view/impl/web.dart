@@ -114,6 +114,8 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
   @override
   final Function onScrollChanged;
   @override
+  final Function? onHorizontalScrollChanged;
+  @override
   final Function? onScrollChangedForMobileWeb;
 
   /// Constructor
@@ -138,7 +140,7 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
       this.webSpecificParams = const WebSpecificParams(),
       this.mobileSpecificParams = const MobileSpecificParams(),
       required this.onScrollChanged,
-       this.onScrollChangedForMobileWeb})
+       this.onScrollChangedForMobileWeb, this.onHorizontalScrollChanged})
       : super(key: key);
 
   @override
@@ -248,7 +250,11 @@ class _WebViewXState extends State<WebViewX> {
         "wheel",
         js.allowInterop((event) {
           widget.onScrollChanged(event["deltaY"]);
+          if(widget.onHorizontalScrollChanged !=null) {
+            widget.onHorizontalScrollChanged!(event["deltaX"]);
+          }
           debugPrint("wheel event delta Y, ${event["deltaY"]}");
+          debugPrint("wheel event delta X, ${event["deltaX"]}");
           /*  widget.onScrollChanged( jsWindowObject["scrollX"],
               jsWindowObject["scrollY"], jsWindowObject["innerHeight"]);
           debugPrint("offet scrollY === ${jsWindowObject["pageYOffset"]}");
